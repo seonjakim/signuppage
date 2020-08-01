@@ -23,3 +23,4 @@ material-ui로 global styles를 적용하는 것도 애매해서 어차피 다�
 ###
 
 label을 선택? placeholder?
+warning 글자크기 조정
