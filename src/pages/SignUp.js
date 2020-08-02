@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Paper,
   FormControlLabel,
@@ -9,35 +10,22 @@ import {
   InputLabel,
   Select,
   Button,
+  MenuItem,
 } from "@material-ui/core";
 import { useStyles } from "../styles/themeProvider";
+// import { DatePicker } from "@material-ui/pickers";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export default function SignUp() {
+export default function SignUp(props) {
   const classes = useStyles();
 
   const userState = ["번역회사", "의뢰인", "번역가"];
-  const dollarUnit = ["십만", "만", "백", "천"];
+  const dollarUnit = ["KRW", "USD", "RMB", "SGD"];
 
-  const emailRegex = RegExp(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-  );
-  //Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+  const emailRegex = RegExp(/\S+@\S+\.\S+/);
+
   const passwordRegex = RegExp(/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/);
-
-  // const [signUpValues, setSignUpValues] = useState({
-  //   email: [],
-  //   password: [],
-  //   companyName: [],
-  //   dollarUnit: [],
-  //   foundationDate: [],
-  //   formErrors: {
-  //     email: "",
-  //     password: "",
-  //     companyName: "",
-  //     dollarUnit: "",
-  //     foundationDate: "",
-  //   },
-  // });
 
   const [radioSelected, setRadioSelected] = useState([]);
 
@@ -57,76 +45,68 @@ export default function SignUp() {
   ));
 
   const [email, setEmail] = useState([]);
-
   const getEmail = (e) => {
     setEmail(e.target.value);
   };
 
   const [password, setPassword] = useState([]);
-
   const getPassword = (e) => {
     setPassword(e.target.value);
   };
 
   const [companyName, setCompnayName] = useState([]);
-
   const getCompanyName = (e) => {
     setCompnayName(e.target.value);
   };
 
-  const [dollarUnitSelect, setDollarUnitSelect] = useState("");
+  const dollarSelectOption = dollarUnit.map((dollar, idx) => (
+    <MenuItem key={idx} value={idx}>
+      {dollar}
+    </MenuItem>
+  ));
 
+  const [dollarUnitSelect, setDollarUnitSelect] = useState("");
   const selectDollarUnit = (e) => {
     setDollarUnitSelect(e.target.value);
   };
+  console.log("dollarUnitSelect", dollarUnitSelect);
 
-  const dollarSelectOption = dollarUnit.map((dollar, idx) => (
-    <option key={idx} value={dollar}>
-      {dollar}
-    </option>
-  ));
-
-  const [formErrors, setFormErrors] = useState({
-    email: "",
-    password: "",
-    companyName: "",
-    dollarUnit: "",
-    foundationDate: "",
-  });
-
+  const [foundationDate, setFoundationDate] = useState("");
+  const foundedDate = (e) => {
+    setFoundationDate(e.target.value);
+  };
+  console.log("foundationDate", foundationDate);
   //validation
+  const newPost = {
+    user: radioSelected,
+    email: email,
+    password: password,
+    companyName: companyName,
+    dollarUnitSelect: dollarUnitSelect,
+    foundationDate: foundationDate,
+  };
+
+  const fakePostAPI = async () => {
+    try {
+      const response = await axios.post("fake_api", newPost);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   const validationCheck = (e) => {
-    // const { name, value } = e.target;
-    // switch (name) {
-    //   case "email":
-    //     formErrors.email = emailRegex.test(value)
-    //       ? ""
-    //       : "이메일 양식을 확인하세요";
-    //     break;
-    //   case "password":
-    //     formErrors.password = passwordRegex.test(value)
-    //       ? ""
-    //       : "비밀번호는 8자리 이상, 16자리 이하이고 영문, 숫자, 특수문자가 각 1자리 이상 포함되어야 합니다";
-    //     break;
-    //   case "companyName":
-    //     formErrors.companyName =
-    //       value.length < 3 ? "회사명을 입력해주세요" : "";
-    //     break;
-    //   case "dollarUnit":
-    //     formErrors.dollarUnit = value.length < 1 ? "필수 선택사항입니다" : "";
-    //     break;
-    //   case "foundationDate":
-    //     formErrors.foundationDate =
-    //       value.length < 1 ? "필수 선택사항입니다" : "";
-    //     break;
-    //   default:
-    //     break;
-    // }
-    // setFormErrors({ ...formErrors, [name]: value }, () =>
-    //   console.log("formErrors", formErrors)
-    // );
-    // setFormErrors({ password: e.target.value, ...rest });
+    if (
+      //user도 선택됐는지 확인
+      emailRegex.test(email) &&
+      passwordRegex.test(password) &&
+      companyName.length > 1
+    ) {
+      fakePostAPI();
+      props.props.history.push("/signin");
+    } else {
+      alert("필수 입력 사항을 입력해주세요");
+    }
   };
 
   return (
@@ -152,7 +132,7 @@ export default function SignUp() {
         <div className={classes.btmAlignment}>
           <TextField
             className={classes.textField}
-            placeholder="이메일(아이디)를 입력하세요."
+            label="이메일(아이디)를 입력하세요."
             variant="outlined"
             name="email"
             value={email}
@@ -169,7 +149,7 @@ export default function SignUp() {
             className={classes.textField}
             // label="Filled secondary"
             inputProps={{ "aria-label": "naked" }}
-            placeholder="비밀번호를 입력하세요."
+            label="비밀번호를 입력하세요."
             variant="outlined"
             type="password"
             name="password"
@@ -186,7 +166,7 @@ export default function SignUp() {
 
           <TextField
             className={classes.textField}
-            placeholder="회사명을 입력하세요."
+            label="회사명을 입력하세요."
             variant="outlined"
             name="companyName"
             value={companyName}
@@ -199,39 +179,62 @@ export default function SignUp() {
           </div>
 
           <FormControl className={classes.textField} variant="outlined">
-            <InputLabel>
-              {dollarUnitSelect.length > 0 ? "" : "화폐단위를 선택하세요."}
-            </InputLabel>
+            <InputLabel>화폐단위를 선택하세요.</InputLabel>
             <Select
-              name="dollarUnit"
+              defaultValue="DEFAULT"
               value={dollarUnitSelect}
               onChange={selectDollarUnit}
+              // controlled="true"
+              label="화폐단위를 선택하세요."
             >
+              <MenuItem value="DEFAULT" disabled />
               {dollarSelectOption}
             </Select>
           </FormControl>
           <div className={classes.warningField}>
-            <span className={classes.warningLetter}>필수 선택사항입니다.</span>
+            <span className={classes.warningLetter}>
+              {!dollarUnitSelect && "필수 선택사항입니다."}
+            </span>
           </div>
 
           <form noValidate>
             <TextField
+              id="date"
               className={classes.textField}
               label="설립일을 선택하세요."
-              defaultValue=""
+              value={foundationDate}
+              // defaultValue="mm/dd"
               variant="outlined"
               name="foundationDate"
               type="date"
+              onChange={foundedDate}
+              // InputLabelProps={{ shrink: true }}
             />
+            {/* <DatePicker
+              // clearable
+              className={classes.dateField}
+              selected={foundationDate}
+              onChange={foundedDate}
+              placeholderText="설립일을 선택하세요."
+            /> */}
           </form>
           <div className={classes.warningField}>
-            <span className={classes.warningLetter}>필수 선택사항입니다</span>
+            <span className={classes.warningLetter}>
+              {!foundationDate && "필수 선택사항입니다"}
+            </span>
           </div>
           <div>
-            <Button className={classes.button} variant="contained">
+            <Button
+              disableRipple
+              onClick={validationCheck}
+              className={classes.button}
+              variant="contained"
+            >
               다음
             </Button>
-            <Button className={classes.loginBtn}>로그인</Button>
+            <Button disableRipple className={classes.loginBtn}>
+              로그인
+            </Button>
           </div>
         </div>
       </Paper>

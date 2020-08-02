@@ -16,6 +16,7 @@ export const useStyles = makeStyles({
   },
   title: {
     fontSize: "24px",
+    fontWeight: "bold",
     color: "#2f2f2f",
     fontFamily: "Arial-BoldMT",
     marginBottom: "13px",
@@ -59,12 +60,23 @@ export const useStyles = makeStyles({
     fontSize: "16px",
     letterSpacing: "0.15px",
     color: "rgba(0, 0, 0, 0.6)",
+
     "&:hover": {
       borderColor: "transparent",
     },
     "&:focus": {
       borderColor: "red",
     },
+  },
+  dateField: {
+    width: "440px",
+    height: "55px",
+    padding: "18.5px 14px",
+    fontSize: "16px",
+    borderRadius: "4px",
+    border: "1px solid #dadce0",
+    letterSpacing: "0.15px",
+    color: "rgba(0, 0, 0, 0.6)",
   },
   warningField: {
     height: "45px",
@@ -88,12 +100,15 @@ export const useStyles = makeStyles({
     },
   },
   loginBtn: {
+    height: "37px",
     color: "rgba(0, 0, 0, 0.6)",
     letterSpacing: "0.15px",
     fontFamily: "Roboto-Regular",
+    textDecoration: "underline",
+    padding: "0 16px",
     "&:hover": {
-      backgroundColor: "transparent",
-      boxShadow: "none",
+      backgroundColor: "#ffffff",
+      textDecoration: "underline",
     },
   },
 });
