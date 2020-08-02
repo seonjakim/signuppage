@@ -21,7 +21,8 @@ export const useStyles = makeStyles({
     marginBottom: "13px",
   },
   subExp: {
-    fontSize: "16px",
+    fontFamily: "ArialMT",
+    fontSize: "14px",
     color: "#1f1f1f",
   },
   radioSelectField: {
@@ -35,14 +36,34 @@ export const useStyles = makeStyles({
       color: "#f15642",
     },
   },
+  // radioFontSelect: {
+  //   fontFamily: "ArialMT",
+  //   // fontSize: "100px",
+  //   "&$checked": {
+  //     fontFamily: "Arial-BoldMT",
+  //     fontSize: "1px",
+  //     color: "red",
+  //   },
+  // },
+  inputAreaTitle: {
+    fontFamily: "NotoSansCJKkr-Regular",
+    fontSize: "12px",
+    color: "#000000",
+    marginBottom: "8px",
+  },
+  btmAlignment: {
+    margin: "0 0 0 72px",
+  },
   textField: {
     width: "440px",
-    margin: "0 72px",
     fontSize: "16px",
     letterSpacing: "0.15px",
     color: "rgba(0, 0, 0, 0.6)",
     "&:hover": {
       borderColor: "transparent",
+    },
+    "&:focus": {
+      borderColor: "red",
     },
   },
   warningField: {
@@ -52,7 +73,7 @@ export const useStyles = makeStyles({
     fontFamily: "AppleSDGothicNeo-Regular",
     fontSize: "10px",
     color: "#ff0000",
-    margin: "0 0 0 84px",
+    margin: "0 0 0 10px",
   },
   button: {
     width: "91px",
