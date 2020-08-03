@@ -9,7 +9,7 @@ export const useStyles = makeStyles({
     margin: "0 auto 70px",
   },
   frame: {
-    width: "585px",
+    width: "100",
     height: "794px",
     margin: "73px auto 0",
     borderRadius: "11px",
@@ -43,14 +43,14 @@ export const useStyles = makeStyles({
   },
   label: {
     fontFamily: "Arial-BoldMT",
+    fontSize: "13.4px",
   },
   labelChange: {
-    fontFamily: "Arial-BoldMT",
     fontWeight: "bold",
   },
   inputAreaTitle: {
     fontFamily: "NotoSansCJKkr-Regular",
-    fontSize: "12px",
+    fontSize: "11.6px",
     color: "#000000",
     marginBottom: "8px",
   },
@@ -64,17 +64,7 @@ export const useStyles = makeStyles({
     color: "rgba(0, 0, 0, 0.6)",
   },
   zeroPadding: {
-    paddingRight: "8px",
-  },
-  dateField: {
-    width: "440px",
-    height: "55px",
-    padding: "18.5px 14px",
-    fontSize: "16px",
-    borderRadius: "4px",
-    border: "1px solid #dadce0",
-    letterSpacing: "0.15px",
-    color: "rgba(0, 0, 0, 0.6)",
+    paddingRight: "7.7px",
   },
   warningField: {
     height: "45px",
@@ -90,7 +80,8 @@ export const useStyles = makeStyles({
     height: "37px",
     background: "#f15642",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "13.5px",
+    fontFamily: "ArialMT",
     boxShadow: "none",
     "&:hover": {
       backgroundColor: "#f15642",
@@ -110,6 +101,7 @@ export const useStyles = makeStyles({
     },
   },
   languageSelect: {
+    // paddingRight: "0px",
     height: "18px",
     margin: "7px 0 0 22px",
     fontSize: "12px",
