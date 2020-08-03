@@ -6,7 +6,7 @@ export const useStyles = makeStyles({
   },
   marginControl: {
     width: "585px",
-    margin: "0 auto 60px",
+    margin: "0 auto 70px",
   },
   frame: {
     width: "585px",
@@ -41,6 +41,9 @@ export const useStyles = makeStyles({
       color: "#f15642",
     },
   },
+  label: {
+    fontFamily: "Arial-BoldMT",
+  },
   labelChange: {
     fontFamily: "Arial-BoldMT",
     fontWeight: "bold",
@@ -59,19 +62,9 @@ export const useStyles = makeStyles({
     fontSize: "16px",
     letterSpacing: "0.15px",
     color: "rgba(0, 0, 0, 0.6)",
-    "&:label": {
-      color: "red",
-    },
-    "&:hover": {
-      borderColor: "transparent",
-    },
-    "&:focus": {
-      borderColor: "red",
-    },
-
-    MuiTextField: {
-      border: "1px solid red",
-    },
+  },
+  zeroPadding: {
+    paddingRight: "8px",
   },
   dateField: {
     width: "440px",
@@ -118,9 +111,18 @@ export const useStyles = makeStyles({
   },
   languageSelect: {
     height: "18px",
-    margin: "0 0 0 22px",
+    margin: "7px 0 0 22px",
     fontSize: "12px",
     fontFamily: "NotoSansCJKkr-Regular",
     color: "#000000",
+    "&:before": {
+      borderColor: "transparent",
+    },
+    "&:hover:not(.Mui-disabled):before": {
+      borderColor: "transparent",
+    },
+    "&:after": {
+      borderColor: "transparent",
+    },
   },
 });

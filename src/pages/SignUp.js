@@ -14,11 +14,25 @@ import {
   Typography,
   NativeSelect,
   // DatePicker,
+  IconButton,
+  InputAdornment,
 } from "@material-ui/core";
 import { useStyles } from "../styles/themeProvider";
 // import { DatePicker } from "@material-ui/pickers";
 // import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DateFnsUtils from "@date-io/date-fns";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import {
+  MuiPickersUtilsProvider,
+  DatePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+// import "react-datepicker/dist/react-datepicker.css";
+// import {
+//   MuiPickersUtilsProvider,
+//   KeyboardTimePicker,
+//   KeyboardDatePicker,
+// } from "@material-ui/pickers";
 
 export default function SignUp(props) {
   const classes = useStyles();
@@ -43,7 +57,11 @@ export default function SignUp(props) {
       value={user}
       control={<Radio className={classes.radioSelect} color="default" />}
       label={
-        <Typography className={radioSelected === user && classes.labelChange}>
+        <Typography
+          className={
+            radioSelected === user ? classes.labelChange : classes.label
+          }
+        >
           {user}
         </Typography>
       }
@@ -77,9 +95,9 @@ export default function SignUp(props) {
   };
   console.log("dollarUnitSelect", dollarUnitSelect);
 
-  const [foundationDate, setFoundationDate] = useState("");
-  const foundedDate = (e) => {
-    setFoundationDate(e.target.value);
+  const [foundationDate, setFoundationDate] = useState(null);
+  const foundedDate = (date) => {
+    setFoundationDate(date);
   };
   console.log("foundationDate", foundationDate);
   //validation
@@ -211,7 +229,7 @@ export default function SignUp(props) {
             </div>
 
             <form noValidate>
-              <TextField
+              {/* <TextField
                 id="date"
                 className={classes.textField}
                 label="설립일을 선택하세요."
@@ -230,7 +248,7 @@ export default function SignUp(props) {
                 inputProps={{ defaultValue: "" }}
                 // labelFunc={}
                 // InputLabelProps={{ shrink: true }}
-              />
+              /> */}
               {/* <TextField
               variant="outlined"
               id="date"
@@ -264,6 +282,47 @@ export default function SignUp(props) {
               onChange={foundedDate}
               placeholderText="설립일을 선택하세요."
             /> */}
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
+                  className={classes.textField}
+                  clearable
+                  autoOk
+                  disableFuture
+                  inputVariant="outlined"
+                  openTo="year"
+                  format="MM/dd/yyyy"
+                  // margin="normal"
+                  id="date-picker-inline"
+                  label="설립일을 선택하세요."
+                  value={foundationDate}
+                  onChange={foundedDate}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                  InputProps={{
+                    className: classes.zeroPadding,
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <ArrowDropDownIcon color="action" />
+                      </InputAdornment>
+                    ),
+                  }}
+                  // rightArrowButtonProps={<ArrowDropDownIcon />}
+                  // rightArrowButtonProps={{
+                  //   ...rightArrowButtonProps,
+                  //   ...testIdProp("date-picker-right-arrow"),
+                  // }}
+                  // labelFunc={(date) => {
+                  //   console.log(date.isValid());
+                  //   if (date.isValid()) {
+                  //     return date.format("DD/MM/YYYY");
+                  //   } else {
+                  //     return "";
+                  //   }
+                  // }}
+                  // rightArrowButtonProps={Partial<IconButtonProps>}
+                />
+              </MuiPickersUtilsProvider>
             </form>
             <div className={classes.warningField}>
               <span className={classes.warningLetter}>
@@ -285,21 +344,16 @@ export default function SignUp(props) {
             </div>
           </div>
         </Paper>
-        {/* <FormControl className={classes.languageSelect}>
-          <InputLabel htmlFor="demo-customized-select-native">Age</InputLabel> */}
         <NativeSelect
           id="demo-customized-select-native"
           value={age}
           onChange={handleChange}
           className={classes.languageSelect}
-          // input={<BootstrapInput />}
         >
-          {/* <option aria-label="None" value="" /> */}
           <option value={10}>한국어</option>
           <option value={20}>English</option>
           <option value={30}>汉语</option>
         </NativeSelect>
-        {/* </FormControl> */}
       </div>
     </div>
   );
