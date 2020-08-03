@@ -4,15 +4,19 @@ export const useStyles = makeStyles({
   root: {
     width: "100",
   },
+  marginControl: {
+    width: "585px",
+    margin: "0 auto 60px",
+  },
   frame: {
     width: "585px",
     height: "794px",
-    margin: "73px auto",
+    margin: "73px auto 0",
     borderRadius: "11px",
     border: "1px solid #dadce0",
   },
   frameTop: {
-    margin: "68px 0 0 78px",
+    margin: "66px 0 0 78px",
   },
   title: {
     fontSize: "24px",
@@ -37,15 +41,10 @@ export const useStyles = makeStyles({
       color: "#f15642",
     },
   },
-  // radioFontSelect: {
-  //   fontFamily: "ArialMT",
-  //   // fontSize: "100px",
-  //   "&$checked": {
-  //     fontFamily: "Arial-BoldMT",
-  //     fontSize: "1px",
-  //     color: "red",
-  //   },
-  // },
+  labelChange: {
+    fontFamily: "Arial-BoldMT",
+    fontWeight: "bold",
+  },
   inputAreaTitle: {
     fontFamily: "NotoSansCJKkr-Regular",
     fontSize: "12px",
@@ -60,12 +59,18 @@ export const useStyles = makeStyles({
     fontSize: "16px",
     letterSpacing: "0.15px",
     color: "rgba(0, 0, 0, 0.6)",
-
+    "&:label": {
+      color: "red",
+    },
     "&:hover": {
       borderColor: "transparent",
     },
     "&:focus": {
       borderColor: "red",
+    },
+
+    MuiTextField: {
+      border: "1px solid red",
     },
   },
   dateField: {
@@ -110,5 +115,12 @@ export const useStyles = makeStyles({
       backgroundColor: "#ffffff",
       textDecoration: "underline",
     },
+  },
+  languageSelect: {
+    height: "18px",
+    margin: "0 0 0 22px",
+    fontSize: "12px",
+    fontFamily: "NotoSansCJKkr-Regular",
+    color: "#000000",
   },
 });
