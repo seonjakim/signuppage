@@ -113,7 +113,7 @@ export default function SignUp(props) {
       foundationDate !== null
     ) {
       fakePostAPI();
-      props.props.history.push("/signin");
+      props.history.push("/signin");
     } else if (
       !radioSelected.length > 0 &&
       emailRegex.test(email) &&
