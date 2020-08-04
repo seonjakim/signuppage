@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles({
   root: {
@@ -59,12 +59,13 @@ export const useStyles = makeStyles({
   },
   textField: {
     width: "440px",
+    fontFamily: "Roboto-Regular",
     fontSize: "16px",
     letterSpacing: "0.15px",
     color: "rgba(0, 0, 0, 0.6)",
   },
   zeroPadding: {
-    paddingRight: "7.7px",
+    paddingRight: "7.9px",
   },
   warningField: {
     height: "45px",
@@ -101,7 +102,6 @@ export const useStyles = makeStyles({
     },
   },
   languageSelect: {
-    // paddingRight: "0px",
     height: "18px",
     margin: "7px 0 0 22px",
     fontSize: "12px",

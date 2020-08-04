@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   Paper,
@@ -83,10 +84,6 @@ export default function SignUp(props) {
     setFoundationDate(date);
   };
 
-  // console.log("radioSelected", radioSelected);
-  // console.log("dollarUnitSelect", dollarUnitSelect);
-  // console.log("foundationDate", foundationDate);
-
   //validation
   const newPost = {
     user: radioSelected,
@@ -106,7 +103,7 @@ export default function SignUp(props) {
     }
   };
 
-  const validationCheck = (e) => {
+  const validationCheck = () => {
     if (
       radioSelected.length > 0 &&
       emailRegex.test(email) &&
@@ -131,10 +128,6 @@ export default function SignUp(props) {
     }
   };
 
-  // const [age, setAge] = React.useState("");
-  // const handleChange = (event) => {
-  //   setAge(event.target.value);
-  // };
   return (
     <div className={classes.root}>
       <div className={classes.marginControl}>
@@ -156,7 +149,6 @@ export default function SignUp(props) {
               className={classes.textField}
               label="이메일(아이디)를 입력하세요."
               variant="outlined"
-              name="email"
               value={email}
               onChange={getEmail}
             />
@@ -190,7 +182,6 @@ export default function SignUp(props) {
               className={classes.textField}
               label="회사명을 입력하세요."
               variant="outlined"
-              name="companyName"
               value={companyName}
               onChange={getCompanyName}
             />
@@ -230,8 +221,7 @@ export default function SignUp(props) {
                 onChange={foundedDate}
                 InputProps={{
                   className: classes.zeroPadding,
-                  endAdornment: "▼",
-                  // <ArrowDropDownIcon color="action" />,
+                  endAdornment: <ArrowDropDownIcon color="action" />,
                 }}
               />
             </MuiPickersUtilsProvider>
@@ -249,22 +239,15 @@ export default function SignUp(props) {
               >
                 다음
               </Button>
-              <Button disableRipple className={classes.loginBtn}>
-                로그인
-              </Button>
+              <Link to="/signin">
+                <Button disableRipple className={classes.loginBtn}>
+                  로그인
+                </Button>
+              </Link>
             </div>
           </div>
         </Paper>
-        <NativeSelect
-          id="demo-customized-select-native"
-          // value={age}
-          // onChange={handleChange}
-          className={classes.languageSelect}
-          InputProps={{
-            className: classes.zeroPadding,
-          }}
-          IconComponent={() => "▼"}
-        >
+        <NativeSelect className={classes.languageSelect}>
           <option value={10}>한국어</option>
           <option value={20}>English</option>
           <option value={30}>汉语</option>
